@@ -10,10 +10,7 @@
 int main() {
   int port = 9999;
 
-  in_addr ipv4addr;
-  assert(inet_pton(AF_INET, "0.0.0.0", &ipv4addr) == 1 && "Wrong formated ip address");
-
-  hostent* server = gethostbyaddr(&ipv4addr, sizeof(ipv4addr), AF_INET);
+  hostent* server = gethostbyname("localhost");
   assert(server != nullptr && "No such host");
 
   int sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -32,17 +29,19 @@ int main() {
   memset(buffer, 0, sizeof(buffer));
   fgets(buffer, 255, stdin);
 
-  while (strcmp(buffer, "quit")) {
+  while (strcmp(buffer, "quit\n")) {
     assert(write(sockfd, buffer, strlen(buffer)) && "Error writing socket");
 
     memset(buffer, 0, sizeof(buffer));
-    assert(read(sockfd, buffer, 255) && "Error reading socket");
+    assert(read(sockfd, buffer, 255) != -1 && "Error reading socket");
 
-    printf("Server send: %s", buffer);
+    printf("Server send: %s\n", buffer);
 
     memset(buffer, 0, sizeof(buffer));
     fgets(buffer, 255, stdin);
   }
+
+  assert(write(sockfd, buffer, strlen(buffer)) && "Error writing socket");
 
   return 0;
 }
