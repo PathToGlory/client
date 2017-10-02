@@ -19,7 +19,6 @@ add_executable(${PROJECT_NAME}
 # common compilation options
 target_compile_options(${PROJECT_NAME} PUBLIC -O3)
 target_compile_options(${PROJECT_NAME} PUBLIC -std=c++14)
-target_compile_options(${PROJECT_NAME} PUBLIC -m32)
 target_compile_options(${PROJECT_NAME} PUBLIC -pedantic)
 target_compile_options(${PROJECT_NAME} PUBLIC -Wall)
 target_compile_options(${PROJECT_NAME} PUBLIC -Wextra)
