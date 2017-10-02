@@ -27,3 +27,6 @@ target_compile_options(${PROJECT_NAME} PUBLIC -fmessage-length=0)
 
 # changed library output path
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../bin/${CMAKE_BUILD_TYPE})
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
